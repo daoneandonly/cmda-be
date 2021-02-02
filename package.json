@@ -1,0 +1,26 @@
+{
+  "name": "cmda-be",
+  "version": "1.0.0",
+  "description": "A repo made for the progress of the course of cmda-be",
+  "main": "index.js",
+  "scripts": {
+    "start": "browser-sync start -s",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daoneandonly/cmda-be.git"
+  },
+  "author": "Steven Whitton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daoneandonly/cmda-be/issues"
+  },
+  "homepage": "https://github.com/daoneandonly/cmda-be#readme",
+  "dependencies": {
+    "one-liner-joke": "^1.2.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.26.14"
+  }
+}
