@@ -26,14 +26,3 @@ Now run node `start` script which will run `index.js`. Do this by running the fo
 ```bash
 node index.js
 ```
-
-This will return a nice little joke, provided by the [one-liner-joke](https://www.npmjs.com/package/one-liner-joke) npm package.
-
-### Serving the html page
-I'm using the package [Browsersync](https://browsersync.io/) to serve the project.
-
-```bash
-npm run start 
-```
-
-This will run the command `browser-sync start -s` which will serve our `index.html` file

@@ -4,7 +4,8 @@
   "description": "A repo made for the progress of the course of cmda-be",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start -s",
+    "start": "node app.js",
+    "dev": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,9 @@
   },
   "homepage": "https://github.com/daoneandonly/cmda-be#readme",
   "dependencies": {
-    "one-liner-joke": "^1.2.0"
+    "express": "^4.17.1",
+    "one-liner-joke": "^1.2.0",
+    "pug": "^3.0.0"
   },
   "devDependencies": {
     "browser-sync": "^2.26.14"
