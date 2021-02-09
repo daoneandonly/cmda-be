@@ -4,7 +4,8 @@
   "description": "A repo made for the progress of the course of cmda-be",
   "main": "index.js",
   "scripts": {
-    "start": "browser-sync start -s",
+    "start": "node index.js",
+    "dev": "browser-sync start -s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
