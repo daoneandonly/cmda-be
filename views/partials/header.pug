@@ -1,9 +1,10 @@
+mixin headerLink(text, link, className='link')
+  li 
+    a(href!=link class!=className)= text
+
 block header
   nav
     ul
-      li 
-        a(href="/" class="emoji") 👨‍💻 
-      li 
-        a(href="/about") about
-      li 
-        a(href="/profile") profile
+      +headerLink("👨‍💻", "/", "link emoji")
+      +headerLink("About", "about")
+      +headerLink("Profile", "profile")

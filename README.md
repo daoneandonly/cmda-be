@@ -24,5 +24,5 @@ npm install
 Now run node `start` script which will run `index.js`. Do this by running the following command
 
 ```bash
-node index.js
+npm run start
 ```

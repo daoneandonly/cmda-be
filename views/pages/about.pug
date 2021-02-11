@@ -3,4 +3,8 @@ extends ../layout.pug
 block content
   h1 Hello #{name}
 
-  p Welcome to the about page!
+  .conditional
+    if name === "Steven"
+      p You have made this page!
+    else
+      p This is not the page you're looking for
