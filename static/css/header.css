@@ -1,0 +1,37 @@
+header {
+  background-color:thistle;
+  padding: 0 24px;
+}
+
+header ul {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+header ul li {
+  list-style: none;
+  font-size: 1.2em;
+  font-weight: 700;
+  color: rgb(121, 74, 139);
+  text-transform: capitalize;
+  height: 100%;
+}
+
+header ul li a {
+  display: block;
+  padding: 24px;
+  padding-left: 0;
+  height: 100%;
+  transition: color .2s linear;
+}
+
+header ul li a:hover {
+  color:rgb(143, 116, 187)
+}
+
+.emoji {
+  font-size: 1.4em;
+}
