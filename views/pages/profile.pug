@@ -1,11 +1,19 @@
 extends ../layout.pug
 
 block content
-  h1 Profile page of #{name}
+  h1 Profile page of #{person.name}
 
-  p.job Job: 
-    span #{job}
+  each val, key in person
+    p(class=key)= key + ': ' + val
+    button(onClick!="fetch('/profile', { method: 'delete', body: JSON.stringify({item: 'joe'}), headers: {'Content-Type': 'application/json'} })") X
 
-  p.quote Quote: 
-    a(href="https://www.youtube.com/watch?v=DLzxrzFCyOs") 
-      quote #{quote}
+  form(action="/profile" method="post")
+    label(for="key") key
+      select( id="key" name="itemKey")
+        each val, key in person
+          option(value=key)= key
+        option(value="hobby") hobby
+
+    label(for="value") value
+      input(type="text" id="value" name="itemValue")
+    button(type="submit") Add entry
