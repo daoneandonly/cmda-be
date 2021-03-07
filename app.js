@@ -5,9 +5,30 @@ const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
 
+require('dotenv').config()
+
 
 // require data from data file
 const data =  require('./data/data.js');
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = `${process.env.DB_PREFIX}${process.env.DB_USER}:${process.env.DB_PW}${process.env.DB_SUFFIX}`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+client.connect(err => {
+  const db = client.db("app");
+  const collection = db.collection("users");
+
+  const findItems = async () => { 
+    const items = await collection.find({}).toArray();
+    console.log(items);
+    
+    client.close();
+  };
+
+  findItems();
+});
+
 
 // Set express to use pug
 app.set('view engine', 'pug');

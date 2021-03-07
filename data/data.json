@@ -1,0 +1,14 @@
+{  
+  "people":[
+    { 
+      "name": "Steven",
+      "job": "Frontend Developer",
+      "quote": "Never gonna give you up!"
+    },
+    {
+      "name": "Dorus",
+      "job": "Angular Developer",
+      "Quote": "Communiceren"
+    }
+  ]
+}
