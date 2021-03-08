@@ -1,6 +1,7 @@
 extends ../layout.pug
 
 block content
+  h1 Add a new person
   form(action="/profile" method="post")
     label(for="name") Name 
       input(type='text' id="name" name="name")

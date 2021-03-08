@@ -64,7 +64,7 @@ app.get('/profile/add', (req, res) => {
 
 app.post('/profile', (req, res) => {
   console.log('received parsed body:', req.body);
-  data.person[req.body.itemKey] = req.body.itemValue;
+  
   client.connect().then(async client => {
     const users = client.db("app").collection("users");
 

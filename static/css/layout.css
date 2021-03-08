@@ -19,3 +19,13 @@ a:visited {
 main {
   padding: 0 24px;
 }
+.people {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+}
+
+.people .person {
+  max-width: 350px;
+  /* text-align: center; */
+}

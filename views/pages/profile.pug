@@ -2,17 +2,18 @@ extends ../layout.pug
 
 block content
   if people
-    each person in people
-      h1 #{person.name}
-
-      each val, key in person
-        if key === "name" 
-          p(class=key)= 'First Name: ' + val
-        if key === "job" 
-          p(class=key)= 'Current Job: ' + val
-        if key === "quote" 
-          p(class=key)= 'Favorite Quote: ' + val
-          //- button(onClick!="fetch('/profile', { method: 'delete', body: JSON.stringify({item: 'joe'}), headers: {'Content-Type': 'application/json'} })") X
+    div(class="people")
+      each person in people
+        div(class="person")
+          h1 #{person.name}
+          each val, key in person
+            if key === "name" 
+              p(class=key)= 'First Name: ' + val
+            if key === "job" 
+              p(class=key)= 'Current Job: ' + val
+            if key === "quote" 
+              p(class=key)= 'Favorite Quote: ' + val
+              //- button(onClick!="fetch('/profile', { method: 'delete', body: JSON.stringify({item: 'joe'}), headers: {'Content-Type': 'application/json'} })") X
 
       //- form(action="/profile" method="post")
       //-   label(for="key") key
