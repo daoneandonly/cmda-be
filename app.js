@@ -4,31 +4,16 @@ const app = express();
 const port = 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
 
-require('dotenv').config()
-
-
+// import data from dotenv
+dotenv.config()
 // require data from data file
 const data =  require('./data/data.js');
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = `${process.env.DB_PREFIX}${process.env.DB_USER}:${process.env.DB_PW}${process.env.DB_SUFFIX}`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-client.connect(err => {
-  const db = client.db("app");
-  const collection = db.collection("users");
-
-  const findItems = async () => { 
-    const items = await collection.find({}).toArray();
-    console.log(items);
-    
-    client.close();
-  };
-
-  findItems();
-});
-
+const uri = process.env.DB_URI;
+const client = new MongoClient(uri,{ useUnifiedTopology: true });
 
 // Set express to use pug
 app.set('view engine', 'pug');
@@ -56,18 +41,40 @@ app.post('/add', (req, res) => {
 });
 
 app.get('/profile',  (req, res) => {
-  res.render('pages/profile', data );
+
+  client.connect()
+  .then(async client => {
+    let data = []
+    const db = client.db("app");
+    const collection = db.collection("users");
+
+    data = await collection.find({}).toArray();
+
+    res.render('pages/profile', { people: data } );
+  });
 });
 
 app.get('/about',  (req, res) => {
   res.render('pages/about', data );
 });
 
+app.get('/profile/add', (req, res) => {
+  res.render('pages/add-profile')
+})
+
 app.post('/profile', (req, res) => {
   console.log('received parsed body:', req.body);
   data.person[req.body.itemKey] = req.body.itemValue;
+  client.connect().then(async client => {
+    const users = client.db("app").collection("users");
 
-  res.render('pages/profile', data);
+    users.insertOne(req.body)
+    .then(async () => {
+      let data = await users.find({}).toArray();
+      res.render('pages/profile', { people: data });
+    })
+    .catch(error => console.error(error));
+  })
 });
 
 app.delete('/profile', (req, res) => {

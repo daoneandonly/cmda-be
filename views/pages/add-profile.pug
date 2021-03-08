@@ -1,0 +1,14 @@
+extends ../layout.pug
+
+block content
+  form(action="/profile" method="post")
+    label(for="name") Name 
+      input(type='text' id="name" name="name")
+    
+    label(for="job") Job 
+      input(type='text' id="job" name="job")
+
+    label(for="quote") Quote
+      input(type="text" id="quote" name="quote")
+
+    button(type="submit") Add person
