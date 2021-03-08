@@ -4,7 +4,7 @@ block content
   if people
     div(class="people")
       each person in people
-        div(class="person")
+        a(href=`/profile/id=${person._id}` class="person")
           h1 #{person.name}
           each val, key in person
             if key === "name" 
@@ -14,14 +14,5 @@ block content
             if key === "quote" 
               p(class=key)= 'Favorite Quote: ' + val
               //- button(onClick!="fetch('/profile', { method: 'delete', body: JSON.stringify({item: 'joe'}), headers: {'Content-Type': 'application/json'} })") X
-
-      //- form(action="/profile" method="post")
-      //-   label(for="key") key
-      //-     select( id="key" name="itemKey")
-      //-       each val, key in person
-      //-         option(value=key)= key
-      //-       option(value="hobby") hobby
-
-      //-   label(for="value") value
-      //-     input(type="text" id="value" name="itemValue")
-      //-   button(type="submit") Add entry
+      a(class="add-person" href="/profile/add")
+        h2 Add person

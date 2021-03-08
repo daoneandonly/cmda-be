@@ -5,6 +5,7 @@ const port = process.env.PORT || 3000;
 const path = require('path');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const ObjectId = require('mongodb').ObjectId;
 
 // import data from dotenv
 dotenv.config()
@@ -64,7 +65,7 @@ app.get('/profile/add', (req, res) => {
 
 app.post('/profile', (req, res) => {
   console.log('received parsed body:', req.body);
-  
+
   client.connect().then(async client => {
     const users = client.db("app").collection("users");
 
@@ -77,8 +78,22 @@ app.post('/profile', (req, res) => {
   })
 });
 
+app.get('/profile/id=:id', (req, res) => {
+  const id = req.params.id;
+
+  client.connect().then( async () => {
+    const users = client.db("app").collection("users");
+
+    let o_id = new ObjectId(id);
+    let userData = await users.findOne({ "_id": o_id });
+
+    res.render('pages/single-profile', { person: userData });
+  });
+})
+
+
 app.delete('/profile', (req, res) => {
-  console.log('deleting this: ', req.body)
+  console.log('deleting this: ', req.body);
   res.render('pages/profile', data);
 });
 

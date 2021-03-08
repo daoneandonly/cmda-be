@@ -18,14 +18,32 @@ a:visited {
 
 main {
   padding: 0 24px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
 }
+
 .people {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 100%;
 }
 
-.people .person {
+.person, .add-person {
+  border: 2px dashed rgba(0,0,0,.2);
+  padding: 8px;
+  margin: 8px;
   max-width: 350px;
-  /* text-align: center; */
+  transition: border-color .2s ease-in, background-color .2s ease-in, color .2s ease-in ;
+}
+
+.add-person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-person:hover, .person:hover {
+  border-color: white;
+  background-color: slategrey;
+  color: white;
 }
