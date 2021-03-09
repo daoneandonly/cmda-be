@@ -34,6 +34,7 @@ main {
   width: 100%;
   grid-gap: 8px;
   padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .person, .add-person {
@@ -100,6 +101,7 @@ label input[type=text]:focus {
 .button:hover {
   border: 1px solid black;
   cursor: pointer;
+  background-color: rgba(0,0,0,.01);
 }
 
 .button.delete:hover {

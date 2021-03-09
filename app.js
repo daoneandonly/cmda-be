@@ -84,13 +84,12 @@ app.get('/profile/id=:id', (req, res) => {
       }
       else {
         res.render('pages/single-profile', { status: "Error", errorMessage: "Invalid user" })
-      }
-  
+      };
     });
   }
   else {
     res.render('pages/single-profile', { status: "Error", errorMessage: "Invalid user id" })
-  }
+  };
 });
 
 app.get('/profile/id=:id/edit', (req, res) => {
@@ -138,6 +137,19 @@ app.delete('/profile/id=:id', (req, res) => {
     })
     .catch(error => console.error(error));
   })
+});
+
+app.get('/profile/id=:id/delete-profile', (req, res) => {
+  const id = req.params.id;
+
+  client.connect().then( async () => {
+    const users = client.db("app").collection("users");
+
+    let o_id = new ObjectId(id);
+    let userData = await users.findOne({ "_id": o_id });
+
+    res.render('pages/delete-profile', { person: userData });
+  });
 });
 
 // Listen to port

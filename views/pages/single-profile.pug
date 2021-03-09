@@ -11,8 +11,5 @@ block content
     p=person.job
     h4(class="label") Quote
     p=person.quote
-    a(href="#" class="button delete") Delete user 🗑
+    a(href=`id=${person._id}/delete-profile` class="button delete") Delete user 🗑
     a(href=`id=${person._id}/edit` class="button edit") Edit user ✏
-    
-block scripts
-  script(src="/static/js/index.js" type="module")
