@@ -1,5 +1,13 @@
-const oneLinerJoke = require('one-liner-joke');
-const getRandomJoke = oneLinerJoke.getRandomJoke().body;
+const deleteButton = document.querySelector('.button.delete');
 
-console.log('Hello World 👋');
-console.log('Here is a joke:', getRandomJoke);
+deleteButton.addEventListener('click', () => {
+  fetch(window.location.href, {
+    method: 'delete'
+  })
+    .then(res => {
+      if (res.ok) {
+        console.log('User successfully deleted!')
+        window.location.href = "/profile";
+      }
+    })
+})

@@ -33,6 +33,7 @@ main {
   grid-template-columns: repeat( auto-fit, minmax(300px, 1fr));
   width: 100%;
   grid-gap: 8px;
+  padding-top: 24px;
 }
 
 .person, .add-person {

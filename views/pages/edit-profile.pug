@@ -13,5 +13,6 @@ block content
       label(for="quote") 
         div(class="label") Quote
         input(type="text", name="quote" value!=person.quote)
+      a(href=`/profile/id=${person._id}` class="button edit") Cancel
       input(type="submit" class="button edit" value="Update user")
     

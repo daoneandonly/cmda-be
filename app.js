@@ -32,13 +32,6 @@ app.get('/', (req, res) => {
   res.render('index', { desc: "👩‍💻"} )
 });
 
-// app.post('/add', (req, res) => {
-//   console.log('Got body:', req.body);
-//   data.desc = req.body.desc;
-//   console.log(data);
-//   res.render('index', data);
-// });
-
 app.get('/profile',  (req, res) => {
 
   client.connect()
@@ -79,14 +72,25 @@ app.post('/profile', (req, res) => {
 app.get('/profile/id=:id', (req, res) => {
   const id = req.params.id;
 
-  client.connect().then( async () => {
-    const users = client.db("app").collection("users");
-
-    let o_id = new ObjectId(id);
-    let userData = await users.findOne({ "_id": o_id });
-
-    res.render('pages/single-profile', { person: userData });
-  });
+  if (id.length == 24) {
+    client.connect().then( async () => {
+      const users = client.db("app").collection("users");
+  
+      let o_id = new ObjectId(id);
+      let userData = await users.findOne({ "_id": o_id });
+  
+      if (userData) {
+        res.render('pages/single-profile', { person: userData });
+      }
+      else {
+        res.render('pages/single-profile', { status: "Error", errorMessage: "Invalid user" })
+      }
+  
+    });
+  }
+  else {
+    res.render('pages/single-profile', { status: "Error", errorMessage: "Invalid user id" })
+  }
 });
 
 app.get('/profile/id=:id/edit', (req, res) => {
@@ -118,9 +122,22 @@ app.post('/profile/id=:id', (req, res) => {
   });
 })
 
-app.delete('/profile', (req, res) => {
-  console.log('deleting this: ', req.body);
-  res.render('pages/profile', { desc: "👩‍💻" });
+app.delete('/profile/id=:id', (req, res) => {
+  let id = req.params.id;
+  let o_id = new ObjectId(id);
+
+  console.log('Request for deleting ID: ', id);
+
+  client.connect().then(async client => {
+    const users = client.db("app").collection("users");
+
+    users.deleteOne({_id: o_id })
+    .then(async () => {
+      let data = await users.find({}).toArray();
+      res.render('pages/profile', { people: data });
+    })
+    .catch(error => console.error(error));
+  })
 });
 
 // Listen to port
