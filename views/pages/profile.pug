@@ -7,12 +7,12 @@ block content
         a(href=`/profile/id=${person._id}` class="person")
           h1 #{person.name}
           each val, key in person
-            if key === "name" 
-              p(class=key)= 'First Name: ' + val
             if key === "job" 
-              p(class=key)= 'Current Job: ' + val
+              p(class="key")= 'Current Job' 
+              p=val
             if key === "quote" 
-              p(class=key)= 'Favorite Quote: ' + val
+              p(class="key")= 'Favorite Quote'
+              p=val
               //- button(onClick!="fetch('/profile', { method: 'delete', body: JSON.stringify({item: 'joe'}), headers: {'Content-Type': 'application/json'} })") X
       a(class="add-person" href="/profile/add")
         h2 Add person

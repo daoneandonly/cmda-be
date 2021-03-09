@@ -8,9 +8,7 @@ const dotenv = require('dotenv');
 const ObjectId = require('mongodb').ObjectId;
 
 // import data from dotenv
-dotenv.config()
-// require data from data file
-const data =  require('./data/data.js');
+dotenv.config();
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = process.env.DB_URI;
@@ -31,15 +29,15 @@ app.use(function (err, req, res, next) {
 
 // Set routes
 app.get('/', (req, res) => {
-  res.render('index', data )
+  res.render('index', { desc: "👩‍💻"} )
 });
 
-app.post('/add', (req, res) => {
-  console.log('Got body:', req.body);
-  data.desc = req.body.desc;
-  console.log(data);
-  res.render('index', data);
-});
+// app.post('/add', (req, res) => {
+//   console.log('Got body:', req.body);
+//   data.desc = req.body.desc;
+//   console.log(data);
+//   res.render('index', data);
+// });
 
 app.get('/profile',  (req, res) => {
 
@@ -56,7 +54,7 @@ app.get('/profile',  (req, res) => {
 });
 
 app.get('/about',  (req, res) => {
-  res.render('pages/about', data );
+  res.render('pages/about', {data: "no data"} );
 });
 
 app.get('/profile/add', (req, res) => {
@@ -89,12 +87,40 @@ app.get('/profile/id=:id', (req, res) => {
 
     res.render('pages/single-profile', { person: userData });
   });
+});
+
+app.get('/profile/id=:id/edit', (req, res) => {
+  const id = req.params.id;
+
+  client.connect().then( async () => {
+    const users = client.db("app").collection("users");
+
+    let o_id = new ObjectId(id);
+    let userData = await users.findOne({ "_id": o_id });
+
+    res.render('pages/edit-profile', { person: userData });
+  });
 })
 
+app.post('/profile/id=:id', (req, res) => {
+  const id = req.params.id;
+  console.log(req.body);
+
+  client.connect().then( async () => {
+    const users = client.db("app").collection("users");
+    let o_id = new ObjectId(id);
+
+    await users.findOneAndUpdate({ "_id": o_id }, { $set: req.body });
+
+    let userData = await users.findOne({ "_id": o_id });
+
+    res.render('pages/single-profile', { person: userData });
+  });
+})
 
 app.delete('/profile', (req, res) => {
   console.log('deleting this: ', req.body);
-  res.render('pages/profile', data);
+  res.render('pages/profile', { desc: "👩‍💻" });
 });
 
 // Listen to port

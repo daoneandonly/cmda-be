@@ -1,0 +1,17 @@
+extends ../layout.pug
+
+block content
+  if person
+    h1 #{person.name}
+    form(action=`/profile/id=${person._id}` method="post")
+      label(for="name") 
+        div(class="label") Name
+        input(type="text", name="name" value!=person.name)
+      label(for="job") 
+        div(class="label") Job
+        input(type="text", name="job" value!=person.job)
+      label(for="quote") 
+        div(class="label") Quote
+        input(type="text", name="quote" value!=person.quote)
+      input(type="submit" class="button edit" value="Update user")
+    

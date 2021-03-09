@@ -1,12 +1,7 @@
 extends layout.pug
 
 block content
-  h1 Browse to the other pages
-
-  form(action="/add" method="post" auto)
-    label(for="desc") Add your description!
-      input(type="text" name="desc" id="desc")
-    button(type="submit") Submit!
+  h1 Welcome to my webapp!
 
   if desc
     p #{desc} 

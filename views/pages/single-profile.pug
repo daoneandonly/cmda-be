@@ -1,5 +1,16 @@
 extends ../layout.pug
 
 block content
+  a(href="/profile" class="back") ⬅ Back to profiles
+
   if person
-    h1 #{person.name}
+    h1 #{person.name} 
+    h4(class="label") Name
+    p=person.name
+    h4(class="label") Job
+    p=person.job
+    h4(class="label") Quote
+    p=person.quote
+    a(href="#" class="button delete") Delete user 🗑
+    a(href=`id=${person._id}/edit` class="button edit") Edit user ✏
+    
