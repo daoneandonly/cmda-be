@@ -1,0 +1,15 @@
+extends ../layout.pug
+
+block content
+  if person
+    h1 Deleting #{person.name}
+    p Are you sure you want to delete #{person.name}?
+
+    a(href=`/profile/id=${person._id}` class="button") Cancel
+    a(href="#" class="button delete") Delete
+  else 
+    h1 No user found to delete!
+    a(href="/profile" class="button") Return to profiles
+
+block scripts
+  script(src="/static/js/index.js" type="module")

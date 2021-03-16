@@ -1,6 +1,5 @@
 header {
   background-color:thistle;
-  padding: 0 24px;
 }
 
 header ul {
@@ -9,6 +8,9 @@ header ul {
   align-items: center;
   margin: 0;
   padding: 0;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
 }
 
 header ul li {
